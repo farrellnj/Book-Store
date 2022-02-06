@@ -33,7 +33,7 @@ public class Book {
         this.genre = genre;
         this.publisher = publisher;
         this.yearPublished = yearPublished;
-        this.copiesSold = copiesSold;
+        
 
     }
 

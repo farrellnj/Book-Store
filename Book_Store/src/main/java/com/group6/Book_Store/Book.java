@@ -24,7 +24,7 @@ public class Book {
     //you must include a no-args constructor when you have a POST or PUT method
     public Book(){ }
 
-    public Book(String isbn, String name, String description, String price, Spring author, String genre, String publisher, int yearPublished, int copiesSold) {
+    public Book(String isbn, String name, String description, String price, String author, String genre, String publisher, int yearPublished, int copiesSold) {
         this.isbn = isbn;
         this.name = name;
         this.description = description;

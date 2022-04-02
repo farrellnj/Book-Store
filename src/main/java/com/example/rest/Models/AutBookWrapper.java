@@ -7,10 +7,13 @@ public class AutBookWrapper {
 
     private Books books;
 
+    private Genre genre;
 
-    public AutBookWrapper(Authors authors, Books books) {
+
+    public AutBookWrapper(Authors authors, Books books, Genre genre) {
         this.authors = authors;
         this.books = books;
+        this.genre = genre;
     }
 
     public Authors getAuthors() {
@@ -28,4 +31,14 @@ public class AutBookWrapper {
     public void setBooks(Books books) {
         this.books = books;
     }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 }
+
+

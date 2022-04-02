@@ -13,7 +13,10 @@ public class Books {
 
     private String bookName;
 
-    private int genreID;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="genre_id")
+    private Genre genre;
+
     private int publisherID;
     private int isbn;
     private String description;
@@ -31,9 +34,9 @@ public class Books {
     public Books() {
     }
 
-    public Books(String bookName, int genreID, int publisherID, int isbn, String description, int price, int yearPublished, int copiesSold, Authors authors) {
+    public Books(String bookName, Genre genre, int publisherID, int isbn, String description, int price, int yearPublished, int copiesSold, Authors authors) {
         this.bookName = bookName;
-        this.genreID = genreID;
+        this.genre = genre;
         this.publisherID = publisherID;
         this.isbn = isbn;
         this.description = description;
@@ -59,12 +62,9 @@ public class Books {
         this.bookName = bookName;
     }
 
-    public int getGenreID() {
-        return genreID;
-    }
 
-    public void setGenreID(int genreID) {
-        this.genreID = genreID;
+    public void setGenre(Genre genre) {
+        this.genre = genre;
     }
 
     public int getPublisherID() {

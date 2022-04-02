@@ -34,4 +34,13 @@ public class BooksService {
         return bookRepo.existsByIsbn(isbn);
     }
 
+    public Books[] getTopSellersList(){
+        Books[] booksTopSellers = new Books[10];
+        List<Books> books = bookRepo.findAllByOrderByCopiesSoldDesc();
+
+        for(int i = 0; i < booksTopSellers.length; i++){
+            booksTopSellers[i] = books.get(i);
+        }
+        return booksTopSellers;
+    }
 }

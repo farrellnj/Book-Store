@@ -13,7 +13,7 @@ public interface BooksRepo extends JpaRepository<Books, Integer> {
 
     boolean existsByIsbn(Integer isbn);
 
-
+    List<Books> findAllByOrderByCopiesSoldDesc();
 
 
 }

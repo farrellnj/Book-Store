@@ -41,6 +41,12 @@ public class BooksController {
             return books;
     }
 
+    @GetMapping("/getBooks/topSellers")
+    public Books[] getTopSellers(){
+
+        return booksService.getTopSellersList();
+    }
+
 
     /*@GetMapping("/getBooks/{isbn}")
     public ResponseEntity<Books> getIsbn(@PathVariable Integer isbn){

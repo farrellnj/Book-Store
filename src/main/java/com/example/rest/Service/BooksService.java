@@ -29,4 +29,9 @@ public class BooksService {
     public Books get(Integer id){
         return bookRepo.findById(id).get();
     }
+
+    public boolean checkExists(Integer isbn){
+        return bookRepo.existsByIsbn(isbn);
+    }
+
 }

@@ -53,20 +53,34 @@ public class BooksController {
 
         Authors newAuthors = autBook.getAuthors();
         Books newBooks = autBook.getBooks();
-        //Checks to see if lastName exists in database
-        if(!authorsService.checkExists(newAuthors.getLastName(), newAuthors.getFirstName()))
+        //If author is not in system and book already is
+        if(!authorsService.checkExists(newAuthors.getLastName(), newAuthors.getFirstName()) && booksService.checkExists(newBooks.getIsbn()))
         {
             authorsService.save(newAuthors);
+            return "Author entry has been saved! Book already in system";
         }
-        else{
-            //If author already exists find key and update for newBook
+        //If author is in system and book is not
+        else if(authorsService.checkExists(newAuthors.getLastName(), newAuthors.getFirstName()) && !booksService.checkExists(newBooks.getIsbn())){
+            //If author already exists find key and update for newBook\
             newBooks.setAuthors(authorsService.findAuthor(newAuthors.getLastName(), newAuthors.getFirstName()));
             booksService.save(newBooks);
+            newAuthors.getBooks().add(newBooks);
             return "New Book entry has been saved! Author already in system";
         }
-        newBooks.setAuthors(newAuthors);
-        booksService.save(newBooks);
-        return "New Book and Author entry have been Saved!";
+        else if(authorsService.checkExists(newAuthors.getLastName(), newAuthors.getFirstName()) && booksService.checkExists(newBooks.getIsbn())){
+            return "Both author and Book are already in system!";
+        }
+        else{
+            authorsService.save(newAuthors);
+            newBooks.setAuthors(newAuthors);
+            booksService.save(newBooks);
+            newAuthors.getBooks().add(newBooks);
+            return "New Book and Author entry have been Saved!";
+        }
+
+
     }
+
+
 
 }

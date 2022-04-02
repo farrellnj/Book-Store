@@ -34,5 +34,13 @@ public class AuthorsService {
         return authorsRepo.findOneByLastNameAndFirstName(lastName, firstName);
     }
 
-    //public List<Books> findBy
+    public List<Books> findBooksByAuthor(String lastName, String firstName){
+
+        Authors currentAuthor = authorsRepo.findOneByLastNameAndFirstName(lastName, firstName);
+
+        return currentAuthor.getBooks();
+
+
+    }
+
 }

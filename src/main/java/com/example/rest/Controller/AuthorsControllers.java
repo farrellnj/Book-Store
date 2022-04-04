@@ -3,6 +3,7 @@ package com.example.rest.Controller;
 
 import com.example.rest.Models.Authors;
 
+import com.example.rest.Models.Books;
 import com.example.rest.Service.AuthorsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,11 +39,18 @@ public class AuthorsControllers {
         }
     }
 
+   @GetMapping("/author/{lastName}/{firstName}")
+    public List<Books> getBooksByAuthor(@PathVariable String lastName, @PathVariable String firstName ){
+        return authorsService.findBooksByAuthor(lastName, firstName);
+    }
+
+
     @PostMapping("/saveAuthor")
     public String add(@RequestBody Authors authors){
         authorsService.save(authors);
         return "Author had been Saved!";
     }
+
 
 
 

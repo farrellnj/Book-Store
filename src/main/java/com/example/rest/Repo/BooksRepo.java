@@ -10,4 +10,10 @@ import java.util.List;
 public interface BooksRepo extends JpaRepository<Books, Integer> {
 
     Books findOneByIsbn (Integer isbn);
+
+    boolean existsByIsbn(Integer isbn);
+
+    List<Books> findAllByOrderByCopiesSoldDesc();
+
+
 }

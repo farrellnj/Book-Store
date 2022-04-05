@@ -23,8 +23,8 @@ public class Genre {
 
     }
 
-    public Genre(Integer id, String genreName, List<Books> books) {
-        this.id = id;
+    public Genre(String genreName, List<Books> books) {
+
         this.genreName = genreName;
         this.books = books;
     }

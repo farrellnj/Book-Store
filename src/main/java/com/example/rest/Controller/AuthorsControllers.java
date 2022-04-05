@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 @RestController
+@RequestMapping("/api")
 public class AuthorsControllers {
 
     @Autowired
@@ -29,7 +30,7 @@ public class AuthorsControllers {
         return authorsService.listAll();
     }
 
-    @GetMapping("/author/{id}")
+    @GetMapping("/getAuthors/{id}")
     public ResponseEntity<Authors> get(@PathVariable Integer id){
         try{
             Authors authors = authorsService.get(id);
@@ -39,7 +40,7 @@ public class AuthorsControllers {
         }
     }
 
-   @GetMapping("/author/{lastName}/{firstName}")
+   @GetMapping("/getAuthors/{lastName}/{firstName}")
     public List<Books> getBooksByAuthor(@PathVariable String lastName, @PathVariable String firstName ){
         return authorsService.findBooksByAuthor(lastName, firstName);
     }

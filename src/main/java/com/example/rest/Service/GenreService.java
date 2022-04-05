@@ -5,12 +5,14 @@ import com.example.rest.Models.Books;
 import com.example.rest.Models.Genre;
 import com.example.rest.Repo.BooksRepo;
 import com.example.rest.Repo.GenreRepo;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Log4j2
 public class GenreService {
 
     @Autowired
@@ -31,5 +33,10 @@ public class GenreService {
         return currentGenre.getBooks();
 
 
+    }
+
+    public Genre saveGenre(Genre genre){
+        log.info("Saving genre to {} to the database", genre.getGenreName());
+        return genreRepo.save(genre);
     }
 }

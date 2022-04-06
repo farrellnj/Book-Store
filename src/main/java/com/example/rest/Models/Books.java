@@ -2,9 +2,21 @@ package com.example.rest.Models;
 
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 @Entity
+@Getter @Setter @NoArgsConstructor
+@JsonIgnoreProperties({"genre", "authors"})
 public class Books {
 
     @Id
@@ -14,9 +26,10 @@ public class Books {
     private String bookName;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="genre_id")
+    @JoinColumn(name = "genre_id")
     private Genre genre;
 
+    private int ratingCounter;
     private int publisherID;
     private int isbn;
     private String description;
@@ -24,17 +37,19 @@ public class Books {
     private int yearPublished;
     private int copiesSold;
 
+    @OneToMany(mappedBy = "books", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Reviews> reviews = new ArrayList<>();
+
+    private int averageRating;
+    private int sumRating;
+
 
     //Many books to one author
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="author_id")
+    @JoinColumn(name = "author_id")
     private Authors authors;
 
-
-    public Books() {
-    }
-
-    public Books(String bookName, Genre genre, int publisherID, int isbn, String description, int price, int yearPublished, int copiesSold, Authors authors) {
+    public Books(String bookName, Genre genre, int publisherID, int isbn, String description, int price, int yearPublished, int copiesSold, Authors authors, Reviews reviews) {
         this.bookName = bookName;
         this.genre = genre;
         this.publisherID = publisherID;
@@ -44,78 +59,7 @@ public class Books {
         this.yearPublished = yearPublished;
         this.copiesSold = copiesSold;
         this.authors = authors;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getBookName() {
-        return bookName;
-    }
-
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
-
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
-
-    public int getPublisherID() {
-        return publisherID;
-    }
-
-    public void setPublisherID(int publisherID) {
-        this.publisherID = publisherID;
-    }
-
-    public int getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(int isbn) {
-        this.isbn = isbn;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getYearPublished() {
-        return yearPublished;
-    }
-
-    public void setYearPublished(int yearPublished) {
-        this.yearPublished = yearPublished;
-    }
-
-    public int getCopiesSold() {
-        return copiesSold;
-    }
-
-    public void setCopiesSold(int copiesSold) {
-        this.copiesSold = copiesSold;
-    }
-
-    public void setAuthors(Authors authors) {
-        this.authors = authors;
+        this.reviews = (List<Reviews>) reviews;
+        this.ratingCounter = ((List<?>) reviews).size();
     }
 }

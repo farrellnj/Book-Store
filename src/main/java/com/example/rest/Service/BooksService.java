@@ -2,11 +2,16 @@ package com.example.rest.Service;
 
 import com.example.rest.Models.Authors;
 import com.example.rest.Models.Books;
+import com.example.rest.Models.Reviews;
 import com.example.rest.Repo.BooksRepo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class BooksService {
@@ -14,8 +19,8 @@ public class BooksService {
     @Autowired
     private BooksRepo bookRepo;
 
-    public List<Books> listAll(){
-        return bookRepo.findAll();
+    public Page<Books> listAll(Optional<Integer> page){
+        return bookRepo.findAll(PageRequest.of(page.orElse(0), 5));
     }
 
     public void save(Books books){
@@ -26,9 +31,14 @@ public class BooksService {
         return bookRepo.findOneByIsbn(isbn);
     }
 
+    public Books getBookName(String bookName){return bookRepo.findOneByBookName(bookName);}
+
     public Books get(Integer id){
         return bookRepo.findById(id).get();
     }
+
+    public List<Books> getByRating(Integer averageRating){return bookRepo.findByAverageRatingLessThanEqual(averageRating);}
+
 
     public boolean checkExists(Integer isbn){
         return bookRepo.existsByIsbn(isbn);
@@ -43,4 +53,5 @@ public class BooksService {
         }
         return booksTopSellers;
     }
+
 }

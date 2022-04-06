@@ -11,9 +11,12 @@ public interface BooksRepo extends JpaRepository<Books, Integer> {
 
     Books findOneByIsbn (Integer isbn);
 
+    Books findOneByBookName (String bookName);
+
     boolean existsByIsbn(Integer isbn);
 
     List<Books> findAllByOrderByCopiesSoldDesc();
 
+    List<Books> findByAverageRatingLessThanEqual(Integer averageRating);
 
 }

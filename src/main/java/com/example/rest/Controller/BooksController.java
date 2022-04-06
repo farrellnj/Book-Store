@@ -8,6 +8,7 @@ import com.example.rest.Service.AuthorsService;
 import com.example.rest.Service.BooksService;
 import com.example.rest.Service.GenreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -30,12 +32,12 @@ public class BooksController {
     private GenreService genreService;
 
     @GetMapping("/getBooks")
-    public List<Books> list(){
-        return booksService.listAll();
+    public Page<Books> list(@RequestParam Optional<Integer> pages){
+        return booksService.listAll(pages);
     }
 
 
-    @GetMapping("/getBooks/{isbn}")
+    @GetMapping("getBooks/{isbn}")
     public Books getIsbn(@PathVariable Integer isbn){
 
             Books books = booksService.getIsbn(isbn);
@@ -48,6 +50,11 @@ public class BooksController {
         return booksService.getTopSellersList();
     }
 
+    @GetMapping("/getBooks/byRating/{rating}")
+    public List<Books> getByRating(@PathVariable Integer rating){
+
+        return booksService.getByRating(rating);
+    }
 
     /*@GetMapping("/getBooks/{isbn}")
     public ResponseEntity<Books> getIsbn(@PathVariable Integer isbn){

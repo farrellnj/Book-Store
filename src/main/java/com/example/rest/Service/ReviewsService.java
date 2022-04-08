@@ -26,7 +26,7 @@ public class ReviewsService {
 
     public void saveReview(Reviews reviews){
         log.info("Saving review {} to the database", reviews.getReview());
-        Books books = booksRepo.findOneByBookName("Harry Potter");
+        Books books = booksRepo.findOneByBookName(reviews.getBookName());
         books.getReviews().add(reviews);
         books.setRatingCounter(books.getRatingCounter() + 1);
         books.setSumRating(books.getSumRating() + reviews.getRating());

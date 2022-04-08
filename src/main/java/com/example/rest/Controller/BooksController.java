@@ -75,13 +75,13 @@ public class BooksController {
         Genre newGenre = autBook.getGenre();
 
         //If author is not in system and book already is
-        if(!authorsService.checkExists(newAuthors.getLastName(), newAuthors.getFirstName()) && booksService.checkExists(newBooks.getIsbn()))
+        if(!authorsService.checkExists(newAuthors.getLastName(), newAuthors.getFirstName()) && booksService.checkExists(newBooks.getIsbn()) && booksService.checkExistsByBookName(newBooks.getBookName()))
         {
             authorsService.save(newAuthors);
             return "Author entry has been saved! Book already in system";
         }
         //If author is in system and book is not
-        else if(authorsService.checkExists(newAuthors.getLastName(), newAuthors.getFirstName()) && !booksService.checkExists(newBooks.getIsbn())){
+        else if(authorsService.checkExists(newAuthors.getLastName(), newAuthors.getFirstName()) && !booksService.checkExists(newBooks.getIsbn()) && !booksService.checkExistsByBookName(newBooks.getBookName())){
             //If author already exists find key and update for newBook\
             newBooks.setAuthors(authorsService.findAuthor(newAuthors.getLastName(), newAuthors.getFirstName()));
             newBooks.setGenre(genreService.findGenre(newGenre.getGenreName()));
@@ -90,7 +90,7 @@ public class BooksController {
             newGenre.getBooks().add(newBooks);
             return "New Book entry has been saved! Author already in system";
         }
-        else if(authorsService.checkExists(newAuthors.getLastName(), newAuthors.getFirstName()) && booksService.checkExists(newBooks.getIsbn())){
+        else if(authorsService.checkExists(newAuthors.getLastName(), newAuthors.getFirstName()) && booksService.checkExists(newBooks.getIsbn()) && booksService.checkExistsByBookName(newBooks.getBookName())){
             return "Both author and Book are already in system!";
         }
         else{

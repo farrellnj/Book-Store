@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //Allows anyone to get information even if not a user
     @Override
     public void configure(WebSecurity web) throws Exception{
-        web.ignoring().antMatchers("/api/genre/**", "/api/getBooks/**", "/api/getAuthors/**/");
+        web.ignoring().antMatchers("/api/genre/**", "/api/getBooks/**", "/api/getAuthors/**/", "/api/reviews/**");
 
     }
 
@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(STATELESS);
         //This allows anyone to use this linked with permitAll
-        http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh/**", "/api/genre/**", "/api/getBooks/**").permitAll();
+        http.authorizeRequests().antMatchers("/api/login/**", "/api/token/refresh/**", "/api/genre/**", "/api/getBooks/**", "/api/reviews/**").permitAll();
 
         //This need authority to access
         http.authorizeRequests().antMatchers(GET, "/api/user/**").hasAnyAuthority("ROLE_USER");

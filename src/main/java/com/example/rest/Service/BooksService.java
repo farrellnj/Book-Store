@@ -44,6 +44,8 @@ public class BooksService {
         return bookRepo.existsByIsbn(isbn);
     }
 
+    public boolean checkExistsByBookName(String bookName){return bookRepo.existsByBookName(bookName);}
+
     public Books[] getTopSellersList(){
         Books[] booksTopSellers = new Books[10];
         List<Books> books = bookRepo.findAllByOrderByCopiesSoldDesc();

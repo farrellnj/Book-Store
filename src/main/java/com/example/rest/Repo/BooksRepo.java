@@ -17,7 +17,7 @@ public interface BooksRepo extends JpaRepository<Books, Integer> {
 
     List<Books> findAllByOrderByCopiesSoldDesc();
 
-    List<Books> findByAverageRatingLessThanEqual(Integer averageRating);
+    List<Books> findByAverageRatingGreaterThanEqual(Integer averageRating);
 
     boolean existsByBookName(String bookName);
 

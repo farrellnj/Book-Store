@@ -20,6 +20,8 @@ public class User {
     private String name;
     private String username;
     private String password;
+    private String address;
+    private String email;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Reviews> reviews = new ArrayList<>();
@@ -29,11 +31,13 @@ public class User {
     private Collection<Role> roles = new ArrayList<>();
 
 
-    public User(Integer id, String name, String username, String password, Collection<Role> roles, ArrayList<Reviews> reviews) {
+    public User(Integer id, String name, String username, String password, String address, String email, Collection<Role> roles, ArrayList<Reviews> reviews) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.password = password;
+        this.address = address;
+        this.email = email;
         this.roles = roles;
         this.reviews = (List<Reviews>) reviews;
     }

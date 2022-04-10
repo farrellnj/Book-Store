@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.interfaces.DecodedJWT;
+import com.example.rest.Models.Books;
 import com.example.rest.Models.Role;
 import com.example.rest.Models.User;
 import com.example.rest.Service.UserService;
@@ -37,6 +38,11 @@ public class UserController {
     @GetMapping("/users")
     public List<User> list(){
         return userService.getUsers();
+    }
+
+    @GetMapping("/user/get/{userName}")
+    public User getUser (@PathVariable String userName){
+        return userService.getUser(userName);
     }
 
     @PostMapping("/user/save")

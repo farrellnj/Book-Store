@@ -51,6 +51,23 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.saveUser(user));
     }
 
+    @PostMapping("/user/updateUser")
+    public String updateUsers(@RequestBody User user){
+       try {
+
+           String userName = user.getUsername();
+           User oldInfo = userService.getUser(userName);
+
+           oldInfo.setName(user.getName());
+           oldInfo.setPassword(user.getPassword());
+           userService.saveUser(oldInfo);
+
+           return "information has been updated!!";
+       } catch (Exception e){
+           return "Cannot change userName, please enter correct name";
+       }
+    }
+
     @PostMapping("/role/save")
     public ResponseEntity<Role> saveRole(@RequestBody Role role){
         URI uri = URI.create(ServletUriComponentsBuilder.fromCurrentContextPath().path("/api/role/save").toUriString());

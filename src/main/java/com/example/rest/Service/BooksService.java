@@ -37,7 +37,7 @@ public class BooksService {
         return bookRepo.findById(id).get();
     }
 
-    public List<Books> getByRating(Integer averageRating){return bookRepo.findByAverageRatingLessThanEqual(averageRating);}
+    public List<Books> getByRating(Integer averageRating){return bookRepo.findByAverageRatingGreaterThanEqual(averageRating);}
 
 
     public boolean checkExists(Integer isbn){

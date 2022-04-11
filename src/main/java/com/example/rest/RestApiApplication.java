@@ -34,8 +34,8 @@ public class RestApiApplication {
 			/*userService.saveRole(new Role(null, "ROLE_USER"));
 			userService.saveRole(new Role(null, "ROLE_ADMIN"));
 
-			userService.saveUser(new User(null, "John Travolta", "john", "1234", new ArrayList<>(), new ArrayList<>()));
-			userService.saveUser(new User(null, "Fred Clause", "fred", "1234", new ArrayList<>(), new ArrayList<>()));
+			userService.saveUser(new User(null, "John Travolta", "john", "1234",null, null, new ArrayList<>(), new ArrayList<>()));
+			userService.saveUser(new User(null, "Fred Clause", "fred", "1234",null, null,  new ArrayList<>(), new ArrayList<>()));
 			userService.addRoleToUser("john", "ROLE_ADMIN");
 			userService.addRoleToUser("fred", "ROLE_USER");
 

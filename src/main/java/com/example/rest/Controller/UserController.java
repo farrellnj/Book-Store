@@ -74,6 +74,8 @@ public class UserController {
         return ResponseEntity.created(uri).body(userService.saveRole(role));
     }
 
+
+
     @PostMapping("/role/addToUser")
     //Question mark means does not return anything
     public ResponseEntity<?> addRoleToUser(@RequestBody RoleToUserForm form){

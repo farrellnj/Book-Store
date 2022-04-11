@@ -35,7 +35,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     //Allows anyone to get information even if not a user
     @Override
     public void configure(WebSecurity web) throws Exception{
-        web.ignoring().antMatchers("/api/genre/**", "/api/getBooks/**", "/api/getAuthors/**/", "/api/reviews/**");
+        web.ignoring().antMatchers("/api/genre/**", "/api/getBooks/**", "/api/getAuthors/**/", "/api/getReviews/**");
 
     }
 
@@ -50,7 +50,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
         //This need authority to access
         http.authorizeRequests().antMatchers(GET, "/api/reviews/**").hasAnyAuthority("ROLE_USER");
-        http.authorizeRequests().antMatchers(POST, "/api/user/**", "/api/saveBook/**", "/api/genre/save/**").hasAnyAuthority("ROLE_ADMIN");
+        http.authorizeRequests().antMatchers(POST, "/api/user/**", "/api/saveBook/**", "/api/genre/save/**", "/api//reviews/save/**").hasAnyAuthority("ROLE_ADMIN");
         http.authorizeHttpRequests().anyRequest().authenticated();
         http.addFilter(customAuthenticationFilter);
         http.addFilterBefore(new CustomAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

@@ -10,6 +10,8 @@ import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @Log4j2
 public class ReviewsService {
@@ -33,5 +35,9 @@ public class ReviewsService {
         books.setAverageRating(books.getSumRating() / books.getRatingCounter());
         reviewsRepo.save(reviews);
 
+    }
+
+    public List<Reviews> listReviewsHighestToLowest(){
+        return reviewsRepo.findAllByOrderByRatingDesc();
     }
 }

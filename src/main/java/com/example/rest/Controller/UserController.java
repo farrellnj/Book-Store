@@ -54,6 +54,7 @@ public class UserController {
     @PostMapping("/user/updateUser")
     public String updateUsers(@RequestBody User user){
        try {
+
            String userName = user.getUsername();
            User oldInfo = userService.getUser(userName);
 
@@ -61,7 +62,7 @@ public class UserController {
            oldInfo.setPassword(user.getPassword());
            userService.saveUser(oldInfo);
 
-           return "information has been updated";
+           return "information has been updated!!";
        } catch (Exception e){
            return "Cannot change userName, please enter correct name";
        }

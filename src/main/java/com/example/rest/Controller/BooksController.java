@@ -37,7 +37,15 @@ public class BooksController {
     }
 
 
-    @GetMapping("getBooks/{isbn}")
+    @GetMapping("/getBooks/averageRating")
+    public Integer getAverageRating(@RequestParam String bookName){
+        Books books = booksService.getBookName(bookName);
+
+        return books.getAverageRating();
+
+    }
+
+    @GetMapping("/getBooks/{isbn}")
     public Books getIsbn(@PathVariable Integer isbn){
 
             Books books = booksService.getIsbn(isbn);

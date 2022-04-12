@@ -1,10 +1,11 @@
 package com.example.rest.Service;
 
+import com.example.rest.Models.Cart;
 import com.example.rest.Models.Role;
 import com.example.rest.Models.User;
+import com.example.rest.Repo.CartRepo;
 import com.example.rest.Repo.RoleRepo;
 import com.example.rest.Repo.UserRepo;
-import lombok.extern.java.Log;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -30,7 +31,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private RoleRepo roleRepo;
 
     @Autowired
+    private CartRepo cartRepo;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
+
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -51,7 +56,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User saveUser(User user) {
         log.info("Saving new user {} to the database", user.getName());
-        user.setPassword(passwordEncoder.encode(user.getPassword()))    ;
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+        Cart newCart = new Cart();
+        newCart.setUserName(user.getUsername());
+        cartRepo.save(newCart);
+
         return userRepo.save(user);
     }
 

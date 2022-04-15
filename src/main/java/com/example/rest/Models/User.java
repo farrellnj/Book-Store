@@ -27,12 +27,14 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Reviews> reviews = new ArrayList<>();
 
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<CreditCard> creditCard = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     private Collection<Role> roles = new ArrayList<>();
 
 
-    public User(Integer id, String name, String username, String password, String address, String email, Collection<Role> roles, ArrayList<Reviews> reviews) {
+    public User(Integer id, String name, String username, String password, String address, String email, Collection<Role> roles, ArrayList<Reviews> reviews, ArrayList<CreditCard> creditCard) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -41,6 +43,10 @@ public class User {
         this.email = email;
         this.roles = roles;
         this.reviews = (List<Reviews>) reviews;
+        this.creditCard = (List<CreditCard>) creditCard;
+
+
+
     }
 
 

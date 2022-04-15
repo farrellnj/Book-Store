@@ -40,8 +40,8 @@ public class AuthorsControllers {
         }
     }
 
-   @GetMapping("/getAuthors/{lastName}/{firstName}")
-    public List<Books> getBooksByAuthor(@PathVariable String lastName, @PathVariable String firstName ){
+   @GetMapping("/getBooksByAuthor")
+    public List<Books> getBooksByAuthor(@RequestParam String lastName, @RequestParam String firstName ){
         return authorsService.findBooksByAuthor(lastName, firstName);
     }
 

@@ -1,11 +1,7 @@
 package com.example.rest.Service;
 
-import com.example.rest.Models.Cart;
-import com.example.rest.Models.Role;
-import com.example.rest.Models.User;
-import com.example.rest.Repo.CartRepo;
-import com.example.rest.Repo.RoleRepo;
-import com.example.rest.Repo.UserRepo;
+import com.example.rest.Models.*;
+import com.example.rest.Repo.*;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -16,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.awt.print.Book;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +29,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     private CartRepo cartRepo;
+
+    @Autowired
+    private BooksRepo booksRepo;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
@@ -85,6 +85,19 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public List<User> getUsers() {
         return userRepo.findAll();
+    }
+
+
+    public String addBookToWishList(String userName, String bookName){
+       try {
+           User user = userRepo.findByUsername(userName);
+           Books book = booksRepo.findOneByBookName(bookName);
+
+           return "Book has been added to WishList";
+       }
+        catch(Exception e){
+           return "Error";
+        }
     }
 
 

@@ -6,30 +6,23 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.awt.print.Book;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
-public class CartItems {
+public class CreditCard {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id")
-    private Cart cart;
-
+    private Long creditCardNumber;
+    private String creditCardType;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "books_id")
-    private Books books;
+    @JoinColumn(name="user_id")
+    private User user;
 
-    public CartItems(Cart cart, Books books){
-        this.cart = cart;
-        this.books = books;
-    }
 
 }

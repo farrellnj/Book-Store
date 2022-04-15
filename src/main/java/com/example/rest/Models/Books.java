@@ -42,7 +42,7 @@ public class Books {
 
     private int averageRating;
     private int sumRating;
-
+    
 
     //Many books to one author
     @ManyToOne(fetch = FetchType.LAZY)

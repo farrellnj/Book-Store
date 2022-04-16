@@ -22,6 +22,7 @@ public class CreditCardService {
     public void saveCreditCard(CreditCard creditCard, String userName){
         User user = userRepo.findByUsername(userName);
         user.getCreditCard().add(creditCard);
+        creditCard.setUser(user);
         creditCardRepo.save(creditCard);
 
     }

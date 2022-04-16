@@ -6,6 +6,7 @@ import com.example.rest.Models.User;
 import com.example.rest.Service.CreditCardService;
 import com.example.rest.Service.ReviewsService;
 import com.example.rest.Service.UserService;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -36,9 +37,8 @@ public class CreditCardController {
         }
 
     }
-
+    //Second Part added
     @GetMapping("/getCreditCard")
-    @JsonIgnoreProperties({"hibernateLazyInitializer"})
     public List<CreditCard> getCreditCards(@RequestParam String userName) throws Exception {
         try {
 
@@ -49,5 +49,6 @@ public class CreditCardController {
             throw new Exception("Failed to retrieve cart");
         }
     }
+
 
 }

@@ -10,6 +10,8 @@ import com.example.rest.Repo.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CreditCardService {
 
@@ -26,4 +28,11 @@ public class CreditCardService {
         creditCardRepo.save(creditCard);
 
     }
+
+    public List<CreditCard> getCreditCards(String userName){
+        User user = userRepo.findByUsername(userName);
+        return user.getCreditCard();
+    }
+
+
 }

@@ -6,10 +6,13 @@ import com.example.rest.Models.User;
 import com.example.rest.Service.CreditCardService;
 import com.example.rest.Service.ReviewsService;
 import com.example.rest.Service.UserService;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api")
@@ -33,4 +36,18 @@ public class CreditCardController {
         }
 
     }
+
+    @GetMapping("/getCreditCard")
+    @JsonIgnoreProperties({"hibernateLazyInitializer"})
+    public List<CreditCard> getCreditCards(@RequestParam String userName) throws Exception {
+        try {
+
+            return creditCardService.getCreditCards(userName);
+
+        }
+        catch(Exception e){
+            throw new Exception("Failed to retrieve cart");
+        }
+    }
+
 }

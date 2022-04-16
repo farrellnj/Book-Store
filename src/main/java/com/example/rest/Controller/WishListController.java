@@ -38,7 +38,7 @@ public class WishListController {
             newWishList.setListName(wishListName);
             newWishList.setUserName(user.getUsername());
             wishListService.save(newWishList);
-            return "New Book and Author entry have been Saved!";
+            return "Your new wishList " + wishListName + " has been created";
         }
 
 
